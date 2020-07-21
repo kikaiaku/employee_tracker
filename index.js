@@ -94,7 +94,7 @@ async function viewAllRoles() {
   return rows;
 }
 
-async function viewAllDepartments() {
+async function viewAllDepartmentsAndRole() {
   // SELECT * from department;
 
   let query = "SELECT * FROM department";
@@ -111,10 +111,10 @@ async function viewAllEmployees() {
   console.table(rows);
 }
 
-async function viewAllEmployeesByDepartment() {
+async function viewAllEmployeesByDepartmentAndRoles() {
   // View all employees by department
   console.log("");
-  let query = "SELECT first_name, last_name, department.name FROM ((employee INNER JOIN role ON role_id = role.id) INNER JOIN department ON department_id = department.id);";
+  let query = "SELECT first_name, last_name, department.name, role.title FROM ((employee INNER JOIN role ON role_id = role.id) INNER JOIN department ON department_id = department.id) ;";
   const rows = await db.query(query);
   console.table(rows);
 }
@@ -373,7 +373,7 @@ async function main() {
       }
 
       case 'View all employees by department': {
-        await viewAllEmployeesByDepartment();
+        await viewAllEmployeesByDepartmentAndRoles();
         break;
       }
 
